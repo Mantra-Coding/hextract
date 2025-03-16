@@ -1,0 +1,32 @@
+{
+    "name": "hextract",
+    "description": "A modern, lightweight utility library for color extraction and accessibility calculations in React applications. Extract dominant colors from images and ensure your color combinations meet WCAG contrast guidelines.",
+    "version": "1.0.0",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Mantra-Coding/hextract.git"
+    },
+    "scripts": {
+        "build": "pnpm clean && rollup -c",
+        "clean": "rm -rf dist",
+        "docs": "typedoc"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@rollup/plugin-terser": "^0.4.4",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+    },
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^26.0.1",
+        "@rollup/plugin-node-resolve": "^15.2.3",
+        "rollup": "^4.19.1",
+        "rollup-plugin-peer-deps-external": "^2.2.4",
+        "rollup-plugin-typescript2": "^0.31.1",
+        "typedoc": "^0.28.0",
+        "typedoc-plugin-markdown": "^4.5.0"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "entryPoints": ["./src/index.tsx"],
+    "out": "docs",
+    "plugin": ["typedoc-plugin-markdown"],
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "excludeExternals": true
+}
