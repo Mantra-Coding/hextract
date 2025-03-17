@@ -16,9 +16,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@rollup/plugin-terser": "^0.4.4",
-        "react": "^19.0.0",
-        "react-dom": "^19.0.0"
+        "@rollup/plugin-terser": "^0.4.4"
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^26.0.1",

@@ -38,3 +38,13 @@ export default {
         typescript({ useTsconfigDeclarationDir: true }),   
     ]
 };
+
+/** @type {import('typedoc').TypeDocOptions} */
+const typedocOptions = {
+  entryPoints: ["./src/index.tsx"],
+  out: "docs",
+  plugin: ["typedoc-plugin-markdown"],
+  excludePrivate: true,
+  excludeProtected: true,
+  excludeExternals: true
+};
