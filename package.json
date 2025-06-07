@@ -1,7 +1,7 @@
 {
     "name": "hextract",
     "description": "A modern, lightweight utility library for color extraction and accessibility calculations in React applications. Extract dominant colors from images and ensure your color combinations meet WCAG contrast guidelines.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "main": "dist/index.js",
     "module": "dist/index.js",
     "types": "dist/index.d.ts",
