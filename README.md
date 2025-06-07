@@ -162,3 +162,60 @@ const MyComponent = () => {
     );
 };
 ```
+
+## React Integration
+
+### Basic Usage
+
+```tsx
+import React, { useEffect, useState, useRef } from "react";
+import { computeAverageColor, contrast } from "hextract";
+
+const ImageColorExtractor: React.FC = () => {
+    const imgRef = useRef<HTMLImageElement>(null);
+    const [bgColor, setBgColor] = useState("#ffffff");
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        if (imgRef.current) {
+            setIsLoading(true);
+            computeAverageColor(imgRef.current)
+                .then((color) => {
+                    setBgColor(color);
+                    setIsLoading(false);
+                })
+                .catch((error) => {
+                    console.error("Failed to extract color:", error);
+                    setIsLoading(false);
+                });
+        }
+    }, []);
+
+    return (
+        <div
+            style={{
+                transition: "background-color 0.5s ease",
+                backgroundColor: bgColor,
+                padding: "20px",
+                borderRadius: "8px"
+            }}
+        >
+            {isLoading && <p>Extracting dominant color...</p>}
+            <img
+                ref={imgRef}
+                src="/path/to/your/image.jpg"
+                alt="Color source image"
+                style={{ maxWidth: "100%" }}
+            />
+            <p
+                style={{
+                    color: "#ffffff",
+                    textShadow: "1px 1px 2px rgba(0,0,0,0.7)"
+                }}
+            >
+                The average color of this image is: {bgColor}
+            </p>
+        </div>
+    );
+};
+```

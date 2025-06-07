@@ -2,6 +2,7 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "rollup-plugin-typescript2";
+import { terser } from "@rollup/plugin-terser";
 import packageJson from "./package.json" with { type: "json" };
 
 const banner = `/*
@@ -11,40 +12,53 @@ const banner = `/*
 * ${packageJson.name} v${packageJson.version}
 */`;
 
-/** @type {import('rollup').OutputOptions}*/
-const outputOptions = {
-	dir: "./dist",
-	format: "esm",
-	sourcemap: true,
-	exports: "named",
-	preserveModules: true,
-	banner
-}
-
 /** @type {import('rollup').RollupOptions} */
-export default {
-    input: "./src/index.tsx",
-    external: ["react", "react-dom"],
-    output: [
-        {	
-			name: "index.js",
-            ...outputOptions,
+export default [
+    // ESM build
+    {
+        input: "./src/index.tsx",
+        external: ["react", "react-dom"],
+        output: {
+            file: "./dist/index.js",
+            format: "esm",
+            sourcemap: true,
+            banner
         },
-    ],
-    plugins: [
-        peerDepsExternal(),
-        resolve(),
-        commonjs(),
-        typescript({ useTsconfigDeclarationDir: true }),   
-    ]
-};
-
-/** @type {import('typedoc').TypeDocOptions} */
-const typedocOptions = {
-  entryPoints: ["./src/index.tsx"],
-  out: "docs",
-  plugin: ["typedoc-plugin-markdown"],
-  excludePrivate: true,
-  excludeProtected: true,
-  excludeExternals: true
-};
+        plugins: [
+            peerDepsExternal(),
+            resolve({ browser: true }),
+            commonjs(),
+            typescript({ 
+                useTsconfigDeclarationDir: true,
+                tsconfigOverride: {
+                    exclude: ["**/*.test.*", "**/*.spec.*"]
+                }
+            }),
+            terser()
+        ]
+    },
+    // CommonJS build
+    {
+        input: "./src/index.tsx",
+        external: ["react", "react-dom"],
+        output: {
+            file: "./dist/index.cjs",
+            format: "cjs",
+            sourcemap: true,
+            banner,
+            exports: "named"
+        },
+        plugins: [
+            peerDepsExternal(),
+            resolve({ browser: true }),
+            commonjs(),
+            typescript({ 
+                useTsconfigDeclarationDir: true,
+                tsconfigOverride: {
+                    exclude: ["**/*.test.*", "**/*.spec.*"]
+                }
+            }),
+            terser()
+        ]
+    }
+];
