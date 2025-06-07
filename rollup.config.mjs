@@ -16,7 +16,7 @@ const banner = `/*
 export default [
     // ESM build
     {
-        input: "./src/index.tsx",
+        input: "./src/index.ts",
         external: ["react", "react-dom"],
         output: {
             file: "./dist/index.js",
@@ -39,7 +39,7 @@ export default [
     },
     // CommonJS build
     {
-        input: "./src/index.tsx",
+        input: "./src/index.ts",
         external: ["react", "react-dom"],
         output: {
             file: "./dist/index.cjs",
