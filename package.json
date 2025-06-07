@@ -1,7 +1,7 @@
 {
     "name": "hextract",
     "description": "A modern, lightweight utility library for color extraction and accessibility calculations in React applications. Extract dominant colors from images and ensure your color combinations meet WCAG contrast guidelines.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "main": "dist/index.js",
     "module": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -46,7 +46,13 @@
         "docs": "typedoc",
         "prepublishOnly": "pnpm build",
         "lint": "eslint src --ext .ts",
-        "type-check": "tsc --noEmit"
+        "type-check": "tsc --noEmit",
+        "release:patch": "npm version patch && npm publish",
+        "release:minor": "npm version minor && npm publish",
+        "release:major": "npm version major && npm publish",
+        "release:custom": "npm publish",
+        "preversion": "pnpm lint && pnpm type-check && pnpm build",
+        "postversion": "git push && git push --tags"
     },
     "author": "Mantra Coding <mantracoding@gmail.com>",
     "license": "MIT",
